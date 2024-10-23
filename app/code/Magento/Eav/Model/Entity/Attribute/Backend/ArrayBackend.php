@@ -65,7 +65,8 @@ class ArrayBackend extends \Magento\Eav\Model\Entity\Attribute\Backend\AbstractB
             ',',
             array_filter(
                 array_unique($data),
-                fn($value) => is_numeric($value) || !empty($value))
+                fn($value) => is_numeric($value) || !empty($value)
+            )
         );
     }
 }
