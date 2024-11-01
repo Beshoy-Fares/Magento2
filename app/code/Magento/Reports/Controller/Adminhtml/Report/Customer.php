@@ -6,9 +6,7 @@
 declare(strict_types=1);
 
 /**
- *
  * Customer reports admin controller
- *
  */
 namespace Magento\Reports\Controller\Adminhtml\Report;
 
