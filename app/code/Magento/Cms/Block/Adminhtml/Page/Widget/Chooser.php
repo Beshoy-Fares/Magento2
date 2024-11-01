@@ -7,7 +7,6 @@ namespace Magento\Cms\Block\Adminhtml\Page\Widget;
 
 /**
  * CMS page chooser for Wysiwyg CMS widget
- *
  */
 class Chooser extends \Magento\Backend\Block\Widget\Grid\Extended
 {
