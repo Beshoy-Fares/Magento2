@@ -1,7 +1,16 @@
 <?php
 /**
- * Copyright © Magento, Inc. All rights reserved.
- * See COPYING.txt for license details.
+ * Copyright 2024 Adobe
+ * All Rights Reserved.
+ *
+ * NOTICE: All information contained herein is, and remains
+ * the property of Adobe and its suppliers, if any. The intellectual
+ * and technical concepts contained herein are proprietary to Adobe
+ * and its suppliers and are protected by all applicable intellectual
+ * property laws, including trade secret and copyright laws.
+ * Dissemination of this information or reproduction of this material
+ * is strictly forbidden unless prior written permission is obtained from
+ * Adobe.
  */
 namespace Magento\Framework\App\PageCache;
 
@@ -13,6 +22,32 @@ use Magento\Framework\Serialize\Serializer\Json;
  */
 class Identifier implements IdentifierInterface
 {
+    /**
+     * Pattern detect marketing parameters
+     */
+    public const PATTERN_MARKETING_PARAMETERS = [
+        '/&?gad_source\=[^&]+/',
+        '/&?gbraid\=[^&]+/',
+        '/&?wbraid\=[^&]+/',
+        '/&?_gl\=[^&]+/',
+        '/&?dclid\=[^&]+/',
+        '/&?gclsrc\=[^&]+/',
+        '/&?srsltid\=[^&]+/',
+        '/&?msclkid\=[^&]+/',
+        '/&?_kx\=[^&]+/',
+        '/&?gclid\=[^&]+/',
+        '/&?cx\=[^&]+/',
+        '/&?ie\=[^&]+/',
+        '/&?cof\=[^&]+/',
+        '/&?siteurl\=[^&]+/',
+        '/&?zanpid\=[^&]+/',
+        '/&?origin\=[^&]+/',
+        '/&?fbclid\=[^&]+/',
+        '/&?mc_(.*?)\=[^&]+/',
+        '/&?utm_(.*?)\=[^&]+/',
+        '/&?_bta_(.*?)\=[^&]+/',
+    ];
+
     /**
      * @var \Magento\Framework\App\Request\Http
      */
@@ -50,9 +85,11 @@ class Identifier implements IdentifierInterface
      */
     public function getValue()
     {
+        $pattern = self::PATTERN_MARKETING_PARAMETERS;
+        $replace = array_fill(0, count(self::PATTERN_MARKETING_PARAMETERS), '');
         $data = [
             $this->request->isSecure(),
-            $this->request->getUriString(),
+            preg_replace($pattern, $replace, (string)$this->request->getUriString()),
             $this->request->get(\Magento\Framework\App\Response\Http::COOKIE_VARY_STRING)
                 ?: $this->context->getVaryString()
         ];

@@ -1,7 +1,16 @@
 <?php
 /**
- * Copyright © Magento, Inc. All rights reserved.
- * See COPYING.txt for license details.
+ * Copyright 2024 Adobe
+ * All Rights Reserved.
+ *
+ * NOTICE: All information contained herein is, and remains
+ * the property of Adobe and its suppliers, if any. The intellectual
+ * and technical concepts contained herein are proprietary to Adobe
+ * and its suppliers and are protected by all applicable intellectual
+ * property laws, including trade secret and copyright laws.
+ * Dissemination of this information or reproduction of this material
+ * is strictly forbidden unless prior written permission is obtained from
+ * Adobe.
  */
 declare(strict_types=1);
 
@@ -114,6 +123,45 @@ class IdentifierForSaveTest extends TestCase
                     [
                         true,
                         'http://example.com/path1/',
+                        self::VARY
+                    ]
+                )
+            ),
+            $this->model->getValue()
+        );
+    }
+
+    /**
+     * Test get identifier for save value with marketing parameters.
+     *
+     * @return void
+     */
+    public function testGetValueWithMarketingParameters(): void
+    {
+        $this->requestMock->expects($this->any())
+            ->method('isSecure')
+            ->willReturn(true);
+
+        $this->requestMock->expects($this->any())
+            ->method('getUriString')
+            ->willReturn('http://example.com/path1/?abc=123&gclid=456&utm_source=abc');
+
+        $this->contextMock->expects($this->any())
+            ->method('getVaryString')
+            ->willReturn(self::VARY);
+
+        $this->identifierStoreReader->method('getPageTagsWithStoreCacheTags')->willReturnCallback(
+            function ($value) {
+                return $value;
+            }
+        );
+
+        $this->assertEquals(
+            sha1(
+                json_encode(
+                    [
+                        true,
+                        'http://example.com/path1/?abc=123',
                         self::VARY
                     ]
                 )
