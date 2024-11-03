@@ -1,7 +1,7 @@
 <?php
 /**
- * Copyright © Magento, Inc. All rights reserved.
- * See COPYING.txt for license details.
+ * Copyright 2014 Adobe
+ * All Rights Reserved.
  */
 namespace Magento\Framework\App\PageCache;
 
@@ -176,7 +176,7 @@ class Kernel
                     $this->serializer->serialize($this->getPreparedData($response)),
                     $this->identifierForSave->getValue(),
                     $tags,
-                    $maxAge
+                    (int) $maxAge
                 );
             }
         }
