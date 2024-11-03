@@ -1,7 +1,7 @@
 <?php
 /**
- * Copyright © Magento, Inc. All rights reserved.
- * See COPYING.txt for license details.
+ * Copyright 2014 Adobe
+ * All Rights Reserved.
  */
 
 namespace Magento\User\Controller\Adminhtml\User;
@@ -29,14 +29,15 @@ class Save extends \Magento\User\Controller\Adminhtml\User implements HttpPostAc
      *
      * @return SecurityCookie
      * @deprecated 100.1.0
+     * @see Nothing
      */
     private function getSecurityCookie()
     {
         if (!($this->securityCookie instanceof SecurityCookie)) {
             return \Magento\Framework\App\ObjectManager::getInstance()->get(SecurityCookie::class);
-        } else {
-            return $this->securityCookie;
         }
+
+        return $this->securityCookie;
     }
 
     /**
