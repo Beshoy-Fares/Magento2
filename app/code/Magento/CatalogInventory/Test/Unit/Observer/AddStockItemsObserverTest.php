@@ -1,7 +1,7 @@
 <?php
 /**
- * Copyright © Magento, Inc. All rights reserved.
- * See COPYING.txt for license details.
+ * Copyright 2018 Adobe
+ * All Rights Reserved.
  */
 declare(strict_types=1);
 
@@ -29,16 +29,16 @@ class AddStockItemsObserverTest extends TestCase
      *
      * @var AddStockItemsObserver
      */
-    private $subject;
+    private AddStockItemsObserver $subject;
 
     /**
      * @var StockConfigurationInterface|MockObject
      */
-    private $stockConfigurationMock;
+    private StockConfigurationInterface $stockConfigurationMock;
     /**
      * @var StockRegistryPreloader|MockObject
      */
-    private $stockRegistryPreloader;
+    private StockRegistryPreloader $stockRegistryPreloader;
 
     /**
      * @inheritdoc
