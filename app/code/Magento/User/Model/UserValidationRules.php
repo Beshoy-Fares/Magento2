@@ -24,7 +24,7 @@ class UserValidationRules
     /**
      * Minimum length of admin password
      */
-    public const MIN_PASSWORD_LENGTH = 7;
+    public const MIN_PASSWORD_LENGTH = 12;
 
     /**
      * Adds validation rule for user first name, last name, username and email
