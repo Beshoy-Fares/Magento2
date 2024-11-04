@@ -58,9 +58,6 @@ class ArrayBackend extends \Magento\Eav\Model\Entity\Attribute\Backend\AbstractB
 
     /**
      * Prepare attribute values
-     *
-     * @param array $data
-     * @return string
      */
     private function prepare(array $data): string
     {
