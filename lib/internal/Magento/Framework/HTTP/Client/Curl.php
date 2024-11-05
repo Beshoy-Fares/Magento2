@@ -11,7 +11,6 @@ namespace Magento\Framework\HTTP\Client;
 /**
  * Class to work with HTTP protocol using curl library
  *
- * @author      Magento Core Team <core@magentocommerce.com>
  * @SuppressWarnings(PHPMD.ExcessiveClassComplexity)
  * @api
  */
@@ -244,6 +243,74 @@ class Curl implements \Magento\Framework\HTTP\ClientInterface
     public function post($uri, $params)
     {
         $this->makeRequest("POST", $uri, $params);
+    }
+
+    /**
+     * Make PUT request
+     *
+     * @param string $uri
+     * @param array|string $params
+     * @return void
+     */
+    public function put($uri, $params)
+    {
+        $this->makeRequest("PUT", $uri, $params);
+    }
+
+    /**
+     * Make DELETE request
+     *
+     * @param string $uri
+     * @return void
+     */
+    public function delete($uri)
+    {
+        $this->makeRequest("DELETE", $uri);
+    }
+
+    /**
+     * Make PATCH request
+     *
+     * @param string $uri
+     * @param array|string $params
+     * @return void
+     */
+    public function patch($uri, $params)
+    {
+        $this->makeRequest("PATCH", $uri, $params);
+    }
+
+    /**
+     * Make OPTIONS request
+     *
+     * @param string $uri
+     * @return void
+     */
+    public function options($uri)
+    {
+        $this->makeRequest("OPTIONS", $uri);
+    }
+
+    /**
+     * Make HEAD request
+     *
+     * @param string $uri
+     * @return void
+     */
+    public function head($uri)
+    {
+        $this->makeRequest("HEAD", $uri);
+    }
+
+    /**
+     * Make TRACE request
+     *
+     * @param string $uri
+     * @return void
+     */
+    public function trace($uri)
+    {
+        $this->makeRequest("TRACE", $uri);
     }
 
     /**
