@@ -1,7 +1,7 @@
 <?php
 /**
- * Copyright © Magento, Inc. All rights reserved.
- * See COPYING.txt for license details.
+ * Copyright 2016 Adobe
+ * All Rights Reserved.
  */
 
 namespace Magento\Config\App\Config\Type;
@@ -226,18 +226,19 @@ class System implements ConfigTypeInterface
      */
     public function get($path = '')
     {
-        $pathParts = explode('/', $path);
-        $scopeType = array_shift($pathParts);
-        $scopeId = array_shift($pathParts);
         if ($path === '') {
             $this->data = $this->loadAllData();
             return $this->data;
         }
 
+        $pathParts = explode('/', $path);
+        $scopeType = array_shift($pathParts);
+
         if ($scopeType === ScopeInterface::SCOPE_DEFAULT) {
             return $this->getWithParts($path);
         }
 
+        $scopeId = array_shift($pathParts);
         $configPath = implode('/', $pathParts);
 
         try {
